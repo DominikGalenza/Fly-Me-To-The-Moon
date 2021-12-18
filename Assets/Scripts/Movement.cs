@@ -6,13 +6,15 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float thrust = 5f; 
     [SerializeField] float rotation = 5f;
-    Rigidbody rigidbody;
+    Rigidbody rb;
+    AudioSource audioSource;
+
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ProcessThrust();
@@ -23,7 +25,15 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space))
         {
-            rigidbody.AddRelativeForce(Vector3.up * thrust * Time.deltaTime);
+            rb.AddRelativeForce(Vector3.up * thrust * Time.deltaTime);
+            if(!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
         }
     }
 
@@ -41,8 +51,8 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(float rotationThisFrame)
     {
-        rigidbody.freezeRotation = true;
+        rb.freezeRotation = true;
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
-        rigidbody.freezeRotation = false;
+        rb.freezeRotation = false;
     }
 }
