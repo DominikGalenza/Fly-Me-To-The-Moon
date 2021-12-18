@@ -9,12 +9,16 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource audioSource;
 
+    bool isTransitioning = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
     void OnCollisionEnter(Collision other) 
     {
+        if(isTransitioning) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Launch Pad":
@@ -34,16 +38,20 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
+        audioSource.Stop();
         audioSource.PlayOneShot(explosion);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", delayTime);
+        isTransitioning = true;
     }
 
     void StartFinishSequence()
     {
+        audioSource.Stop();
         audioSource.PlayOneShot(finish);
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", delayTime);
+        isTransitioning = true;
     }
 
     void ReloadLevel()
