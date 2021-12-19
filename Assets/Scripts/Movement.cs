@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -11,17 +13,21 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
     AudioSource audioSource;
+    CollisionHandler collisionHandler;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        collisionHandler = GetComponent<CollisionHandler>();
     }
 
     void Update()
     {
         ProcessThrust();
         ProcessRotation();
+        LoadNextLevel();
+        DisableCollisions();
     }
 
     void ProcessThrust()
@@ -54,6 +60,22 @@ public class Movement : MonoBehaviour
         else if(Input.GetKey(KeyCode.D))
         {
             ApplyRotation(-rotation);
+        }
+    }
+
+    void LoadNextLevel()
+    {
+        if(Input.GetKey(KeyCode.L))
+        {
+            collisionHandler.LoadNextLevel();
+        }
+    }
+
+    void DisableCollisions()
+    {
+        if(Input.GetKey(KeyCode.C))
+        {
+            rb.detectCollisions = !rb.detectCollisions;
         }
     }
 
