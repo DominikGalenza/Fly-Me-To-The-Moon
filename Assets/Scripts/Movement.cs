@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
     [SerializeField] float thrust = 5f; 
     [SerializeField] float rotation = 5f;
     [SerializeField] AudioClip engine;
+    [SerializeField] ParticleSystem exhaustParticles;
+
     Rigidbody rb;
     AudioSource audioSource;
 
@@ -31,10 +33,15 @@ public class Movement : MonoBehaviour
             {
                 audioSource.PlayOneShot(engine);
             }
+            if(!exhaustParticles.isPlaying)
+            {
+                exhaustParticles.Play();
+            }
         }
         else
         {
             audioSource.Stop();
+            exhaustParticles.Stop();
         }
     }
 
