@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayTime: 1
-  explosion: {fileID: 8300000, guid: a724f4b8836aae045ab6ac4cb856a4b7, type: 3}
+  explosion: {fileID: 8300000, guid: 59c724895a7fde0488bf02dee093097c, type: 3}
   finish: {fileID: 8300000, guid: 3649c9ff8fb287e4789b1ea47f872dd7, type: 3}
   finishParticles: {fileID: 8816620297881890803}
   explosionParticles: {fileID: 1366012564887016488}
