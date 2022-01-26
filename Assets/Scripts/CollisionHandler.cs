@@ -24,10 +24,6 @@ public class CollisionHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Launch Pad":
-                Debug.Log("Let's start!");
-                break;
-            case "Fuel":
-                Debug.Log("Rocket was refueled");
                 break;
             case "Finish":
                 StartFinishSequence();

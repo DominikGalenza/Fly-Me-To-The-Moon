@@ -26,8 +26,6 @@ public class Movement : MonoBehaviour
     {
         ProcessThrust();
         ProcessRotation();
-        LoadNextLevel();
-        DisableCollisions();
     }
 
     void ProcessThrust()
@@ -60,22 +58,6 @@ public class Movement : MonoBehaviour
         else if(Input.GetKey(KeyCode.D))
         {
             ApplyRotation(-rotation);
-        }
-    }
-
-    void LoadNextLevel()
-    {
-        if(Input.GetKey(KeyCode.L))
-        {
-            collisionHandler.LoadNextLevel();
-        }
-    }
-
-    void DisableCollisions()
-    {
-        if(Input.GetKey(KeyCode.C))
-        {
-            rb.detectCollisions = !rb.detectCollisions;
         }
     }
 
